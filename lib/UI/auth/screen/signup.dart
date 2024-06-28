@@ -2,7 +2,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
-import 'package:youtube/UI/Home/homescreen.dart';
+import 'package:youtube/UI/Home/bottom_nav.dart';
 
 import 'package:youtube/UI/auth/widget/dialogbox.dart';
 import 'package:youtube/UI/auth/widget/signup_textfield.dart';
@@ -28,8 +28,10 @@ class _SignUpState extends State<SignUp> {
       if (user != null && user.emailConfirmedAt != null) {
         print("SIGNED IN AND EMAIL VERIFIED");
         if (mounted) {
-          Navigator.of(context)
-              .pushNamedAndRemoveUntil(HomeScreen.routeName, (route) => false);
+          Navigator.of(context).pushAndRemoveUntil(
+              MaterialPageRoute(builder: (context) {
+            return const BottomNav();
+          }), (route) => false);
         }
       }
     });
